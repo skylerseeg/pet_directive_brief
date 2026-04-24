@@ -1,3 +1,4 @@
+import { SiteNav } from "@/components/SiteNav";
 import { Hero } from "@/components/sections/Hero";
 import { TheProblem } from "@/components/sections/TheProblem";
 import { OriginalIdea } from "@/components/sections/OriginalIdea";
@@ -11,17 +12,20 @@ import { TheCall } from "@/components/sections/TheCall";
 
 export default function Page() {
   return (
-    <main className="flex flex-col">
-      <Hero />
-      <TheProblem />
-      <OriginalIdea />
-      <Evolution />
-      <FourLayers />
-      <WhyThisWins />
-      <CompetitiveGap />
-      <Pricing />
-      <Roadmap />
-      <TheCall />
-    </main>
+    <>
+      <SiteNav />
+      <main className="flex flex-col">
+        <Hero />
+        <TheProblem />
+        <OriginalIdea />
+        <Evolution />
+        <FourLayers />
+        <WhyThisWins />
+        <CompetitiveGap />
+        <Pricing />
+        <Roadmap />
+        <TheCall />
+      </main>
+    </>
   );
 }

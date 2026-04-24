@@ -56,10 +56,13 @@
     scroll-behavior: smooth;
   }
 
-  /* Full-height snap rhythm on mobile only — desktop scrolls freely. */
+  /* Full-height snap rhythm on mobile only — desktop scrolls freely.
+   * Proximity (vs mandatory) lets users scroll past a section without the
+   * browser fighting the gesture; iOS Safari in particular feels much
+   * smoother under proximity. */
   @media (max-width: 768px) {
     html {
-      scroll-snap-type: y mandatory;
+      scroll-snap-type: y proximity;
     }
   }
 
