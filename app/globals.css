@@ -91,6 +91,30 @@
     background: hsl(var(--sage) / 0.35);
     color: hsl(var(--foreground));
   }
+
+  /* Smooth page-load: <main> fades and lifts in once, separate from
+   * the fixed nav so its containing block isn't transformed. The
+   * Hero's word-stagger lands on top of this settle. */
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  main {
+    animation: page-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    main {
+      animation: none;
+    }
+  }
 }
 
 @layer components {
