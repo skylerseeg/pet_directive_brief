@@ -63,10 +63,17 @@ export type CompetitiveGapSection = SectionBase & {
   matrix: CompetitorRow[];
 };
 
-export type PricingTier = { name: string; price: string; includes: string };
+export type PricingTier = {
+  name: string;
+  price: string;
+  cadence: string;
+  unlocks: string;
+};
+export type LtvCallout = { range: string; explainer: string };
 export type PricingSection = SectionBase & {
   type: "pricing";
   tiers: PricingTier[];
+  ltv: LtvCallout;
 };
 
 export type RoadmapPhase = { name: string; window: string; ships: string };
@@ -235,25 +242,38 @@ export const SECTIONS = [
     type: "pricing",
     eyebrow: "Pricing architecture",
     headline: "A small object. A recurring promise. A one-time peace of mind.",
-    body: "Three price points, three jobs — hardware margin, software subscription, legacy service fee.",
+    body: "Four tiers, one customer relationship — each tier earns the right to the next.",
     tiers: [
       {
         name: "Tag",
-        price: "$29 one-time",
-        includes: "Hardware + recovery network, forever.",
+        price: "$15–25",
+        cadence: "one-time",
+        unlocks: "Hardware and a lifetime recovery network.",
       },
       {
-        name: "Plus",
-        price: "$6 / month",
-        includes:
-          "Records, sharing, multi-caregiver, directive draft.",
+        name: "Basic App",
+        price: "Free",
+        cadence: "always",
+        unlocks: "Claim your pet. Start the directive.",
       },
       {
-        name: "Legacy",
-        price: "$149 one-time",
-        includes: "Notarized directive + guardian onboarding.",
+        name: "Premium",
+        price: "$5–8",
+        cadence: "per month",
+        unlocks: "Vet records, reminders, multi-caregiver access.",
+      },
+      {
+        name: "Legacy Plus",
+        price: "$15–20",
+        cadence: "per month",
+        unlocks: "Notarized directive, guardian, pet trust.",
       },
     ],
+    ltv: {
+      range: "$500–$2,000+",
+      explainer:
+        "Per pet, lifetime — one tag, a decade of recurring care, a legacy fee.",
+    },
   },
   {
     id: "roadmap",
