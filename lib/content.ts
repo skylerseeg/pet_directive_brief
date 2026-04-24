@@ -144,26 +144,10 @@ export const SECTIONS = [
     headline: "Four layers. One pet.",
     body: "Each layer works standalone; each one makes the next more valuable.",
     layers: [
-      {
-        name: "Hardware",
-        description:
-          "NFC/QR tag, GPS optional. The handle in the physical world.",
-      },
-      {
-        name: "Recovery",
-        description:
-          "A scan routes finder → owner in one tap. No app install.",
-      },
-      {
-        name: "Management",
-        description:
-          "Vet records, meds, feeding, sitters. The pet's operating system.",
-      },
-      {
-        name: "Legacy",
-        description:
-          "Advance directive and guardian designation. The part no one else builds.",
-      },
+      { name: "Hardware", description: "QR tag, always on the pet." },
+      { name: "Recovery", description: "Scan to reconnect, privacy-first." },
+      { name: "Management", description: "Vet records, reminders, memory." },
+      { name: "Legacy", description: "Directives, guardians, pet trusts." },
     ],
   },
   {
