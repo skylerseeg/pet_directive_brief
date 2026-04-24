@@ -87,9 +87,12 @@ export type RoadmapSection = SectionBase & {
   phases: RoadmapPhase[];
 };
 
+export type CallAction = { count: number; group: string };
 export type CallSection = SectionBase & {
   type: "call";
-  points: string[];
+  actions: CallAction[];
+  closing: string;
+  signature: string;
 };
 
 export type PitchSection =
@@ -316,14 +319,17 @@ export const SECTIONS = [
   {
     id: "call",
     type: "call",
-    eyebrow: "Next moves",
-    headline: "Twenty calls between us and a yes.",
-    body: "Before production code, validate with the people who'd buy it or block it.",
-    points: [
-      "Call 20 owners, vets, and estate attorneys in the next two weeks.",
-      "Validate: price, directive wording, recovery UX, who actually pays.",
-      "Build the thinnest slice that makes one owner cry — then one vet nod.",
+    eyebrow: "The call",
+    headline: "The next move is small. The next move is real.",
+    body: "Three groups. Five conversations each. Two weeks.",
+    actions: [
+      { count: 20, group: "pet owners" },
+      { count: 10, group: "estate attorneys" },
+      { count: 5, group: "assisted living directors" },
     ],
+    closing:
+      "If all three groups light up, we build. If only pet owners do, it's still a product. Either way — we move.",
+    signature: "— Skyler",
   },
 ] as const satisfies readonly PitchSection[];
 

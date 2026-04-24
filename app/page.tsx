@@ -7,7 +7,7 @@ import { WhyThisWins } from "@/components/sections/WhyThisWins";
 import { CompetitiveGap } from "@/components/sections/CompetitiveGap";
 import { Pricing } from "@/components/sections/Pricing";
 import { Roadmap } from "@/components/sections/Roadmap";
-import { AskSection } from "@/components/sections/ask-section";
+import { TheCall } from "@/components/sections/TheCall";
 
 export default function Page() {
   return (
@@ -21,7 +21,7 @@ export default function Page() {
       <CompetitiveGap />
       <Pricing />
       <Roadmap />
-      <AskSection />
+      <TheCall />
     </main>
   );
 }
