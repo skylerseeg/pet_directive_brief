@@ -45,7 +45,19 @@ export type WhyWinsSection = SectionBase & {
   cards: WhyWinsCard[];
 };
 
-export type CompetitorRow = { player: string; owns: string };
+export type LayerKey = "hardware" | "recovery" | "management" | "legacy";
+export type CompetitorCoverage = "yes" | "no" | "partial";
+export type CompetitorRow = {
+  player: string;
+  hardware: CompetitorCoverage;
+  recovery: CompetitorCoverage;
+  management: CompetitorCoverage;
+  legacy: CompetitorCoverage;
+  /** Inline label next to a coverage cell (e.g. "GPS"). */
+  notes?: Partial<Record<LayerKey, string>>;
+  /** True for the row representing this product. */
+  self?: boolean;
+};
 export type CompetitiveGapSection = SectionBase & {
   type: "competitive-gap";
   matrix: CompetitorRow[];
@@ -180,21 +192,41 @@ export const SECTIONS = [
     body: "The category is fragmented by layer. Our seam is vertical.",
     matrix: [
       {
-        player: "AirTag / Tile",
-        owns: "Finds objects. Not pet-aware, not recoverable by strangers.",
+        player: "PetHub / Dynotag",
+        hardware: "yes",
+        recovery: "yes",
+        management: "no",
+        legacy: "no",
       },
       {
-        player: "Petco / Chewy",
-        owns: "Commerce. Not records, not directives.",
+        player: "Fi / Tractive",
+        hardware: "yes",
+        recovery: "yes",
+        management: "partial",
+        legacy: "no",
+        notes: { recovery: "GPS" },
       },
-      { player: "Rover / Wag", owns: "The sitter hour. Not the relationship." },
       {
-        player: "Vet PIMS (eVet, Covetrus)",
-        owns: "The clinic. Not the household.",
+        player: "Trust & Will / FreeWill",
+        hardware: "no",
+        recovery: "no",
+        management: "no",
+        legacy: "yes",
+      },
+      {
+        player: "11pets / PetDesk",
+        hardware: "no",
+        recovery: "no",
+        management: "yes",
+        legacy: "no",
       },
       {
         player: "Pet Directive",
-        owns: "The pet's identity across its whole life — and after.",
+        hardware: "yes",
+        recovery: "yes",
+        management: "yes",
+        legacy: "yes",
+        self: true,
       },
     ],
   },
