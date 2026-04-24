@@ -260,3 +260,16 @@ export const SECTIONS = [
 ] as const satisfies readonly PitchSection[];
 
 export type SectionId = (typeof SECTIONS)[number]["id"];
+
+/**
+ * Typed accessor — returns the section narrowed to the variant matching
+ * the given `type`. Throws at module init if a section is missing, which
+ * would be a bug, not a runtime case to handle.
+ */
+export function getSection<T extends PitchSectionType>(
+  type: T,
+): Extract<PitchSection, { type: T }> {
+  const found = SECTIONS.find((s) => s.type === type);
+  if (!found) throw new Error(`Pitch section "${type}" is missing from SECTIONS`);
+  return found as Extract<PitchSection, { type: T }>;
+}
