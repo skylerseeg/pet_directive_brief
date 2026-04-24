@@ -39,9 +39,10 @@ export type LayersSection = SectionBase & {
   layers: Layer[];
 };
 
+export type WhyWinsCard = { title: string; tagline: string };
 export type WhyWinsSection = SectionBase & {
   type: "why-wins";
-  points: string[];
+  cards: WhyWinsCard[];
 };
 
 export type CompetitorRow = { player: string; owns: string };
@@ -156,10 +157,19 @@ export const SECTIONS = [
     eyebrow: "Why this wins",
     headline: "The loops bend toward us.",
     body: "Recovery earns trust, trust earns records, records earn legacy — each one subsidizes the next.",
-    points: [
-      "Network effects — every found pet is an origin story.",
-      "Data moat — longitudinal vet and behavior data no competitor accumulates.",
-      "Inverted CAC — tags get bought as gifts; recipients become users.",
+    cards: [
+      {
+        title: "Network Effects",
+        tagline: "Every scan is a new user.",
+      },
+      {
+        title: "Data Moat",
+        tagline: "10 years of pet health data compounds.",
+      },
+      {
+        title: "Inverted CAC",
+        tagline: "Acquire any pet owner, upsell the seniors.",
+      },
     ],
   },
   {
