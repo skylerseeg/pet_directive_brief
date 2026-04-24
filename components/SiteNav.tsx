@@ -73,7 +73,16 @@ export function SiteNav() {
           interactive ? "pointer-events-auto" : "pointer-events-none",
         )}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5 md:px-10">
+        <div
+          className="mx-auto flex max-w-6xl items-center justify-between pb-3.5 md:px-10"
+          style={{
+            paddingLeft:
+              "max(1.5rem, calc(env(safe-area-inset-left) + 1.5rem))",
+            paddingRight:
+              "max(1.5rem, calc(env(safe-area-inset-right) + 1.5rem))",
+            paddingTop: "max(0.875rem, env(safe-area-inset-top))",
+          }}
+        >
           <a
             href="#hero"
             className="flex items-center gap-2 text-sm font-medium tracking-tight text-foreground"
