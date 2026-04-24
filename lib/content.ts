@@ -23,6 +23,9 @@ export type OriginalIdeaSection = SectionBase & {
   type: "original-idea";
   credit: string;
   points: string[];
+  /** Verbatim messages, lowercase and casual — the way the idea actually arrived. */
+  messages: string[];
+  contact: { name: string; initial: string; timestamp: string };
 };
 
 export type EvolutionSection = SectionBase & {
@@ -111,12 +114,22 @@ export const SECTIONS = [
       "Removes ambiguity at the worst possible moment.",
       "Every later layer assumes this atom exists.",
     ],
+    contact: {
+      name: "Cody",
+      initial: "C",
+      timestamp: "Tuesday 11:42 PM",
+    },
+    messages: [
+      "what if pets had advance directives. like the human ones.",
+      "same shape — care wishes, who decides, named guardian. just scoped to a dog.",
+      "the doc is the atom. everything else builds off it.",
+    ],
   },
   {
     id: "evolution",
     type: "evolution",
     eyebrow: "The evolution",
-    headline: "From document to platform.",
+    headline: "The directive was the feature. The pet is the platform.",
     body: "The directive is load-bearing, but paper doesn't scale. The QR tag is the wedge — cheap, tactile, on the pet 24/7.",
     points: [
       "Document → account: the directive becomes a living record.",
