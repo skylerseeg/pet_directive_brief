@@ -6,6 +6,7 @@ import { FourLayers } from "@/components/sections/FourLayers";
 import { WhyThisWins } from "@/components/sections/WhyThisWins";
 import { CompetitiveGap } from "@/components/sections/CompetitiveGap";
 import { Pricing } from "@/components/sections/Pricing";
+import { Roadmap } from "@/components/sections/Roadmap";
 import { AskSection } from "@/components/sections/ask-section";
 
 export default function Page() {
@@ -19,6 +20,7 @@ export default function Page() {
       <WhyThisWins />
       <CompetitiveGap />
       <Pricing />
+      <Roadmap />
       <AskSection />
     </main>
   );

@@ -76,7 +76,12 @@ export type PricingSection = SectionBase & {
   ltv: LtvCallout;
 };
 
-export type RoadmapPhase = { name: string; window: string; ships: string };
+export type RoadmapPhase = {
+  number: string;
+  duration: string;
+  title: string;
+  deliverable: string;
+};
 export type RoadmapSection = SectionBase & {
   type: "roadmap";
   phases: RoadmapPhase[];
@@ -283,24 +288,28 @@ export const SECTIONS = [
     body: "Four phases. Each one ends with something a real user can touch.",
     phases: [
       {
-        name: "Phase 1",
-        window: "6 weeks",
-        ships: "QR tag + public recovery page. No app required.",
+        number: "01",
+        duration: "4–6 weeks",
+        title: "Foundation",
+        deliverable: "Web app, QR tag, public scan flow.",
       },
       {
-        name: "Phase 2",
-        window: "8 weeks",
-        ships: "Account, directive builder, vet share.",
+        number: "02",
+        duration: "2–3 months",
+        title: "Care",
+        deliverable: "Native app, vet records, reminders.",
       },
       {
-        name: "Phase 3",
-        window: "10 weeks",
-        ships: "Guardian flow, notarization partner, mobile app.",
+        number: "03",
+        duration: "6+ months",
+        title: "Legacy",
+        deliverable: "Legacy services, guardian matching.",
       },
       {
-        name: "Phase 4",
-        window: "Ongoing",
-        ships: "NFC/GPS hardware, vet PIMS integrations.",
+        number: "04",
+        duration: "12+ months",
+        title: "Scale",
+        deliverable: "GPS hardware, insurance partnerships.",
       },
     ],
   },
