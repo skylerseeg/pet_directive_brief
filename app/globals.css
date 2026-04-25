@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design system tokens — "Apple meets veterinary care."
+ * Dark-only. Warm off-white on deep charcoal with a single sage accent.
+ *   ink   #0A0A0B   background
+ *   bone  #F2EDE6   foreground (warm off-white)
+ *   sage  #A3BCA7   accent
+ */
+
+@layer base {
+  :root {
+    --ink: 240 5% 4%;
+    --bone: 33 30% 93%;
+    --sage: 126 16% 69%;
+    --sage-muted: 126 12% 55%;
+
+    --background: 240 5% 4%;
+    --foreground: 33 30% 93%;
+
+    --card: 240 6% 7%;
+    --card-foreground: 33 30% 93%;
+
+    --popover: 240 6% 7%;
+    --popover-foreground: 33 30% 93%;
+
+    --primary: 126 16% 69%;
+    --primary-foreground: 240 5% 4%;
+
+    --secondary: 240 5% 12%;
+    --secondary-foreground: 33 30% 93%;
+
+    --muted: 240 5% 10%;
+    --muted-foreground: 30 8% 62%;
+
+    --accent: 126 16% 69%;
+    --accent-foreground: 240 5% 4%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 33 30% 93%;
+
+    --border: 240 4% 14%;
+    --input: 240 4% 14%;
+    --ring: 126 16% 69%;
+
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Full-height snap rhythm on mobile only — desktop scrolls freely.
+   * Proximity (vs mandatory) lets users scroll past a section without the
+   * browser fighting the gesture; iOS Safari in particular feels much
+   * smoother under proximity. */
+  @media (max-width: 768px) {
+    html {
+      scroll-snap-type: y proximity;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+      scroll-snap-type: none;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+    background-image: theme("backgroundImage.grain");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif tracking-tight;
+  }
+
+  ::selection {
+    background: hsl(var(--sage) / 0.35);
+    color: hsl(var(--foreground));
+  }
+
+  /* Smooth page-load: <main> fades and lifts in once, separate from
+   * the fixed nav so its containing block isn't transformed. The
+   * Hero's word-stagger lands on top of this settle. */
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  main {
+    animation: page-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    main {
+      animation: none;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-caption uppercase text-muted-foreground;
+  }
+  .rule {
+    @apply h-px w-full bg-border;
+  }
+}

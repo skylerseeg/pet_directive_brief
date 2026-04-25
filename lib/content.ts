@@ -1,0 +1,349 @@
+/**
+ * Pitch content. Single source of truth for every section on the page.
+ * Sections render off `type`; the union keeps per-type data strongly typed.
+ */
+
+type SectionBase = {
+  id: string;
+  eyebrow: string;
+  headline: string;
+  body: string;
+};
+
+export type HeroSection = SectionBase & {
+  type: "hero";
+};
+
+export type ProblemSection = SectionBase & {
+  type: "problem";
+  points: string[];
+};
+
+export type OriginalIdeaSection = SectionBase & {
+  type: "original-idea";
+  credit: string;
+  points: string[];
+  /** Verbatim messages, lowercase and casual — the way the idea actually arrived. */
+  messages: string[];
+  contact: { name: string; initial: string; timestamp: string };
+};
+
+export type EvolutionSection = SectionBase & {
+  type: "evolution";
+  points: string[];
+};
+
+export type Layer = { name: string; description: string };
+export type LayersSection = SectionBase & {
+  type: "layers";
+  layers: Layer[];
+};
+
+export type WhyWinsCard = { title: string; tagline: string };
+export type WhyWinsSection = SectionBase & {
+  type: "why-wins";
+  cards: WhyWinsCard[];
+};
+
+export type LayerKey = "hardware" | "recovery" | "management" | "legacy";
+export type CompetitorCoverage = "yes" | "no" | "partial";
+export type CompetitorRow = {
+  player: string;
+  hardware: CompetitorCoverage;
+  recovery: CompetitorCoverage;
+  management: CompetitorCoverage;
+  legacy: CompetitorCoverage;
+  /** Inline label next to a coverage cell (e.g. "GPS"). */
+  notes?: Partial<Record<LayerKey, string>>;
+  /** True for the row representing this product. */
+  self?: boolean;
+};
+export type CompetitiveGapSection = SectionBase & {
+  type: "competitive-gap";
+  matrix: CompetitorRow[];
+};
+
+export type PricingTier = {
+  name: string;
+  price: string;
+  cadence: string;
+  unlocks: string;
+};
+export type LtvCallout = { range: string; explainer: string };
+export type PricingSection = SectionBase & {
+  type: "pricing";
+  tiers: PricingTier[];
+  ltv: LtvCallout;
+};
+
+export type RoadmapPhase = {
+  number: string;
+  duration: string;
+  title: string;
+  deliverable: string;
+};
+export type RoadmapSection = SectionBase & {
+  type: "roadmap";
+  phases: RoadmapPhase[];
+};
+
+export type CallAction = { count: number; group: string };
+export type CallSection = SectionBase & {
+  type: "call";
+  actions: CallAction[];
+  closing: string;
+  signature: string;
+};
+
+export type PitchSection =
+  | HeroSection
+  | ProblemSection
+  | OriginalIdeaSection
+  | EvolutionSection
+  | LayersSection
+  | WhyWinsSection
+  | CompetitiveGapSection
+  | PricingSection
+  | RoadmapSection
+  | CallSection;
+
+export type PitchSectionType = PitchSection["type"];
+
+export const SECTIONS = [
+  {
+    id: "hero",
+    type: "hero",
+    eyebrow: "Pet Directive",
+    headline:
+      "What if your pet's collar was the beginning of something bigger?",
+    body: "A tag that comes home with a stranger's phone. A directive that outlives you. A platform built on the oldest contract — I'll take care of them.",
+  },
+  {
+    id: "problem",
+    type: "problem",
+    eyebrow: "The problem",
+    headline: "Three quiet failures. One missing layer.",
+    body: "Pet ownership runs on love and sticky notes. That works until it doesn't.",
+    points: [
+      "Pets get lost — 10M+ a year in the US; roughly 1 in 5 comes home wearing ID.",
+      "Seniors worry — 'who takes her if something happens to me?' has no product answer.",
+      "Legacy planning is broken — wills mention pets as property, never as plans.",
+    ],
+  },
+  {
+    id: "original-idea",
+    type: "original-idea",
+    eyebrow: "The seed",
+    headline: "Cody called it first: a pet advance directive.",
+    body: "Same shape as the human version — care wishes, decision rights, named guardian — scoped to an animal. The document is the atom.",
+    credit: "Original concept: Cody.",
+    points: [
+      "Living document, signed, shared with vet and next-of-kin guardian.",
+      "Removes ambiguity at the worst possible moment.",
+      "Every later layer assumes this atom exists.",
+    ],
+    contact: {
+      name: "Cody",
+      initial: "C",
+      timestamp: "Tuesday 11:42 PM",
+    },
+    messages: [
+      "what if pets had advance directives. like the human ones.",
+      "same shape — care wishes, who decides, named guardian. just scoped to a dog.",
+      "the doc is the atom. everything else builds off it.",
+    ],
+  },
+  {
+    id: "evolution",
+    type: "evolution",
+    eyebrow: "The evolution",
+    headline: "The directive was the feature. The pet is the platform.",
+    body: "The directive is load-bearing, but paper doesn't scale. The QR tag is the wedge — cheap, tactile, on the pet 24/7.",
+    points: [
+      "Document → account: the directive becomes a living record.",
+      "Account → object: a tag on the collar makes it physical, scannable, real.",
+      "Object → network: every scan is a recovery signal and a growth loop.",
+    ],
+  },
+  {
+    id: "layers",
+    type: "layers",
+    eyebrow: "The stack",
+    headline: "Four layers. One pet.",
+    body: "Each layer works standalone; each one makes the next more valuable.",
+    layers: [
+      { name: "Hardware", description: "QR tag, always on the pet." },
+      { name: "Recovery", description: "Scan to reconnect, privacy-first." },
+      { name: "Management", description: "Vet records, reminders, memory." },
+      { name: "Legacy", description: "Directives, guardians, pet trusts." },
+    ],
+  },
+  {
+    id: "why-wins",
+    type: "why-wins",
+    eyebrow: "Why this wins",
+    headline: "The loops bend toward us.",
+    body: "Recovery earns trust, trust earns records, records earn legacy — each one subsidizes the next.",
+    cards: [
+      {
+        title: "Network Effects",
+        tagline: "Every scan is a new user.",
+      },
+      {
+        title: "Data Moat",
+        tagline: "10 years of pet health data compounds.",
+      },
+      {
+        title: "Inverted CAC",
+        tagline: "Acquire any pet owner, upsell the seniors.",
+      },
+    ],
+  },
+  {
+    id: "competitive-gap",
+    type: "competitive-gap",
+    eyebrow: "The gap",
+    headline: "Everyone owns a slice. No one owns the pet.",
+    body: "The category is fragmented by layer. Our seam is vertical.",
+    matrix: [
+      {
+        player: "PetHub / Dynotag",
+        hardware: "yes",
+        recovery: "yes",
+        management: "no",
+        legacy: "no",
+      },
+      {
+        player: "Fi / Tractive",
+        hardware: "yes",
+        recovery: "yes",
+        management: "partial",
+        legacy: "no",
+        notes: { recovery: "GPS" },
+      },
+      {
+        player: "Trust & Will / FreeWill",
+        hardware: "no",
+        recovery: "no",
+        management: "no",
+        legacy: "yes",
+      },
+      {
+        player: "11pets / PetDesk",
+        hardware: "no",
+        recovery: "no",
+        management: "yes",
+        legacy: "no",
+      },
+      {
+        player: "Pet Directive",
+        hardware: "yes",
+        recovery: "yes",
+        management: "yes",
+        legacy: "yes",
+        self: true,
+      },
+    ],
+  },
+  {
+    id: "pricing",
+    type: "pricing",
+    eyebrow: "Pricing architecture",
+    headline: "A small object. A recurring promise. A one-time peace of mind.",
+    body: "Four tiers, one customer relationship — each tier earns the right to the next.",
+    tiers: [
+      {
+        name: "Tag",
+        price: "$15–25",
+        cadence: "one-time",
+        unlocks: "Hardware and a lifetime recovery network.",
+      },
+      {
+        name: "Basic App",
+        price: "Free",
+        cadence: "always",
+        unlocks: "Claim your pet. Start the directive.",
+      },
+      {
+        name: "Premium",
+        price: "$5–8",
+        cadence: "per month",
+        unlocks: "Vet records, reminders, multi-caregiver access.",
+      },
+      {
+        name: "Legacy Plus",
+        price: "$15–20",
+        cadence: "per month",
+        unlocks: "Notarized directive, guardian, pet trust.",
+      },
+    ],
+    ltv: {
+      range: "$500–$2,000+",
+      explainer:
+        "Per pet, lifetime — one tag, a decade of recurring care, a legacy fee.",
+    },
+  },
+  {
+    id: "roadmap",
+    type: "roadmap",
+    eyebrow: "Roadmap",
+    headline: "Shippable in weeks, not years.",
+    body: "Four phases. Each one ends with something a real user can touch.",
+    phases: [
+      {
+        number: "01",
+        duration: "4–6 weeks",
+        title: "Foundation",
+        deliverable: "Web app, QR tag, public scan flow.",
+      },
+      {
+        number: "02",
+        duration: "2–3 months",
+        title: "Care",
+        deliverable: "Native app, vet records, reminders.",
+      },
+      {
+        number: "03",
+        duration: "6+ months",
+        title: "Legacy",
+        deliverable: "Legacy services, guardian matching.",
+      },
+      {
+        number: "04",
+        duration: "12+ months",
+        title: "Scale",
+        deliverable: "GPS hardware, insurance partnerships.",
+      },
+    ],
+  },
+  {
+    id: "call",
+    type: "call",
+    eyebrow: "The call",
+    headline: "The next move is small. The next move is real.",
+    body: "Three groups. Five conversations each. Two weeks.",
+    actions: [
+      { count: 20, group: "pet owners" },
+      { count: 10, group: "estate attorneys" },
+      { count: 5, group: "assisted living directors" },
+    ],
+    closing:
+      "If all three groups light up, we build. If only pet owners do, it's still a product. Either way — we move.",
+    signature: "— Skyler",
+  },
+] as const satisfies readonly PitchSection[];
+
+export type SectionId = (typeof SECTIONS)[number]["id"];
+
+/**
+ * Typed accessor — returns the section narrowed to the variant matching
+ * the given `type`. Throws at module init if a section is missing, which
+ * would be a bug, not a runtime case to handle.
+ */
+export function getSection<T extends PitchSectionType>(
+  type: T,
+): Extract<PitchSection, { type: T }> {
+  const found = SECTIONS.find((s) => s.type === type);
+  if (!found) throw new Error(`Pitch section "${type}" is missing from SECTIONS`);
+  return found as Extract<PitchSection, { type: T }>;
+}
